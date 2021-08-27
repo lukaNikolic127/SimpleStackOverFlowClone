@@ -1,0 +1,22 @@
+﻿@model Forum.Domain.Comment
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this comment?</h3>
+<div>
+    <form asp-action="Delete">
+        <div class="card">
+            <input class="form-control" asp-for="PostId" hidden>
+            <h5 class="card-header">@Model.Member.Username</h5>
+            <div class="card-body">
+                <h5 class="card-title">@Model.DateTime.ToString("dd-MM-yyyy")</h5>
+                <p class="card-text">@Model.Content</p>
+            </div>
+        </div>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+</div>

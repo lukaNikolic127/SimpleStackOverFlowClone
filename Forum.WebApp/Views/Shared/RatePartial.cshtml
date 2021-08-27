@@ -1,0 +1,61 @@
+﻿@model Forum.WebApp.Models.RateViewModel
+
+<div class="col-1 text-center">
+    <!-- RATE UP -->
+    <button class="btn btn-light" id="rate-up-@Model.CommentId">
+        @if (Model.RatedUp)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+            </svg>
+        }
+        @if (!Model.RatedUp)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
+                <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+            </svg>
+        }
+    </button>
+    <h5 id="loving-@Model.CommentId">@Model.RatingUp</h5>
+</div>
+<div class="col-1 text-center">
+    <!-- RATE DOWN -->
+    <button class="btn btn-light" id="rate-down-@Model.CommentId">
+        @if (Model.RatedDown)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg>
+        }
+        @if (!Model.RatedDown)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+            </svg>
+        }
+    </button>
+    <h5 id="hating-@Model.CommentId">@Model.RatingDown</h5>
+</div>
+
+<script>
+    $('#rate-up-@Model.CommentId').click(function () {
+        $.ajax({
+                url: '@Url.ActionLink("RateUp", "Comment")',
+                data: { CommentId: @Model.CommentId },
+                method: 'post',
+                success: function (data) {
+                    $('#rate-@Model.CommentId').html(data);
+                }
+            });
+    });
+    $('#rate-down-@Model.CommentId').click(function () {
+        $.ajax({
+                url: '@Url.ActionLink("RateDown", "Comment")',
+                data: { CommentId: @Model.CommentId },
+                method: 'post',
+                success: function (data) {
+                    $('#rate-@Model.CommentId').html(data);
+                }
+            });
+    });
+</script>

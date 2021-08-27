@@ -1,0 +1,9 @@
+﻿@model Topic
+
+<form method="post" asp-controller="Topic" asp-action="Create">
+    <label>Name:</label>
+    <input type="text" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    @Html.ValidationMessage("TopicNameError")
+    <input type="submit" value="Add" />
+</form>

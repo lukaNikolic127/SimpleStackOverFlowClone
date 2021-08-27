@@ -1,0 +1,51 @@
+﻿@model Forum.WebApp.Models.CreateCommentViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Comment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="card my-3">
+                <h3 class="card-header">@Model.PostMemberUsername</h3>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.PostDateTime.ToString("dd-MM-yyyy")</h5>
+                    <p class="card-text">@Model.PostContent</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Comment.Content" class="control-label"></label>
+                <textarea rows="10" class="form-control" asp-for="Comment.Content"></textarea>
+                <span asp-validation-for="Comment.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Post.PostId" class="control-label"></label>
+                <input asp-for="Post.PostId" class="form-control" />
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Post.TopicId" class="control-label"></label>
+                <input asp-for="Post.TopicId" class="form-control" />
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="MemberId" class="control-label"></label>
+                <input asp-for="MemberId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

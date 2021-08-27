@@ -1,0 +1,23 @@
+﻿@model List<Topic>
+@{
+    ViewData["Title"] = "Topics";
+}
+<h3>Topics</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Topic t in Model)
+        {
+            <tr>
+                <td>@t.Name</td>
+                <td><button class="btn btn-light">@Html.ActionLink("View more", "Details", "Topic", new { id = t.TopicId })</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
